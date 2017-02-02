@@ -37,6 +37,7 @@ class FetchData: NSObject, WKNavigationDelegate {
     var tableView: UITableView?
     var updateLabels:Bool = false
     var multiLine:Bool = false
+    var isWidget:Bool = false
     let noMealString:String = "¯\\_(ツ)_/¯"
     let labelWidth = Int(UIScreen.main.bounds.width*0.9146666667)
     var jsExec:String = ""
@@ -80,6 +81,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         webView.navigationDelegate = self
         self.webView = webView
         webView.load(req)
+        isWidget = true
         timeout=10;
     }
     
@@ -164,7 +166,7 @@ class FetchData: NSObject, WKNavigationDelegate {
                             UniversalMethods.setMealLabel(mealLabel: self.lunchLabel!, navigationItem: self.navigationItem, subView: nil, tableView: nil, text: mealString)
                         }
                     }
-                    if (self.updateLabels && self.jsExec == "" && self.defaults.integer(forKey: "DaysForward") == 0){
+                    if (self.updateLabels && self.jsExec == "" && (self.defaults.integer(forKey: "DaysForward") == 0 || self.isWidget)){
                         self.dateLabel?.text = "\(UniversalMethods.weekDayToString(date: Date())) \(UniversalMethods.monthToShortString(date: Date())) \(UniversalMethods.dayWithEnding(date: Date()))"
                     }
                     if self.jsExec==""{
