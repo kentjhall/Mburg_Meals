@@ -1,0 +1,954 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		33B7A3E741367AA2FE8F83B7 /* Pods_MBSageGrabberUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698B524CA789D8F62C267E93 /* Pods_MBSageGrabberUITests.framework */; };
+		CFB11A2F370AE2F94C58F137 /* Pods_MBSageGrabberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E5458E8B09A6C152996C13 /* Pods_MBSageGrabberTests.framework */; };
+		DD05A3EF1DAD0AFF00CA8EAB /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE858111D9879D8008CAFB3 /* FetchData.swift */; };
+		DD2532431DC6966D007E131B /* ViewControllerD.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2532421DC6966D007E131B /* ViewControllerD.swift */; };
+		DD43A4001E10E96B005256DC /* ViewControllerB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43A3FF1E10E96B005256DC /* ViewControllerB.swift */; };
+		DD5771AB1DAEBC5900ABA52C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5771A91DAEBC5900ABA52C /* Main.storyboard */; };
+		DD86E0961DA204B200E85E5E /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD86E0951DA204B200E85E5E /* NotificationCenter.framework */; };
+		DD86E0991DA204B200E85E5E /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86E0981DA204B200E85E5E /* TodayViewController.swift */; };
+		DD86E09C1DA204B200E85E5E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86E09A1DA204B200E85E5E /* MainInterface.storyboard */; };
+		DD86E0A01DA204B200E85E5E /* MBSageGrabberWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DD86E0941DA204B200E85E5E /* MBSageGrabberWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DDAC073F1DABFBBF009DEB54 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAC073E1DABFBBF009DEB54 /* PushKit.framework */; };
+		DDB539FE1E0C693E0004D3B4 /* UniversalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB539FD1E0C693E0004D3B4 /* UniversalMethods.swift */; };
+		DDC3E7E31DBEAF97008565DA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC3E7E21DBEAF97008565DA /* CoreLocation.framework */; };
+		DDE54C4C1DB52188002FC736 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE54C4B1DB52188002FC736 /* SettingsVC.swift */; };
+		DDE858121D9879D8008CAFB3 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE858111D9879D8008CAFB3 /* FetchData.swift */; };
+		DDE9DD8A1D8A27A40069F345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE9DD891D8A27A40069F345 /* AppDelegate.swift */; };
+		DDE9DD8C1D8A27A40069F345 /* ViewControllerL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE9DD8B1D8A27A40069F345 /* ViewControllerL.swift */; };
+		DDE9DD911D8A27A40069F345 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDE9DD901D8A27A40069F345 /* Assets.xcassets */; };
+		DDE9DD941D8A27A40069F345 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDE9DD921D8A27A40069F345 /* LaunchScreen.storyboard */; };
+		DDE9DD9F1D8A27A40069F345 /* MBSageGrabberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE9DD9E1D8A27A40069F345 /* MBSageGrabberTests.swift */; };
+		DDE9DDAA1D8A27A40069F345 /* MBSageGrabberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE9DDA91D8A27A40069F345 /* MBSageGrabberUITests.swift */; };
+		DDF3FBB91E0E425100F29C49 /* UniversalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB539FD1E0C693E0004D3B4 /* UniversalMethods.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DD86E09E1DA204B200E85E5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDE9DD7E1D8A27A40069F345 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD86E0931DA204B200E85E5E;
+			remoteInfo = MBSageGrabberWidget;
+		};
+		DDE9DD9B1D8A27A40069F345 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDE9DD7E1D8A27A40069F345 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDE9DD851D8A27A40069F345;
+			remoteInfo = MBSageGrabber;
+		};
+		DDE9DDA61D8A27A40069F345 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDE9DD7E1D8A27A40069F345 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDE9DD851D8A27A40069F345;
+			remoteInfo = MBSageGrabber;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DD16735B1E104D1900D76539 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD86E0A41DA204B300E85E5E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DD86E0A01DA204B200E85E5E /* MBSageGrabberWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4C49151344EE18EAB57D5CC0 /* Pods_MBSageGrabber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MBSageGrabber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A7EA90FE993536FF0A83DAA /* Pods-MBSageGrabberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabberTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabberTests/Pods-MBSageGrabberTests.release.xcconfig"; sourceTree = "<group>"; };
+		698B524CA789D8F62C267E93 /* Pods_MBSageGrabberUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MBSageGrabberUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69A96C7227819C50279F56AC /* Pods-MBSageGrabber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabber.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabber/Pods-MBSageGrabber.debug.xcconfig"; sourceTree = "<group>"; };
+		7B10E5A4DCF45F14A40B6962 /* Pods-MBSageGrabberUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabberUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabberUITests/Pods-MBSageGrabberUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C5E5458E8B09A6C152996C13 /* Pods_MBSageGrabberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MBSageGrabberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD0385A71D9D982400E26041 /* MBSageGrabber-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBSageGrabber-Bridging-Header.h"; sourceTree = "<group>"; };
+		DD228A7C1DA7EF11001174D6 /* MBSageGrabberWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MBSageGrabberWidget.entitlements; sourceTree = "<group>"; };
+		DD2532421DC6966D007E131B /* ViewControllerD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerD.swift; sourceTree = "<group>"; };
+		DD43A3FF1E10E96B005256DC /* ViewControllerB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerB.swift; sourceTree = "<group>"; };
+		DD5771AA1DAEBC5900ABA52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DD86E0941DA204B200E85E5E /* MBSageGrabberWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MBSageGrabberWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD86E0951DA204B200E85E5E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		DD86E0981DA204B200E85E5E /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		DD86E09B1DA204B200E85E5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		DD86E09D1DA204B200E85E5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDAABA731D9441C400902820 /* MBSageGrabber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MBSageGrabber.entitlements; sourceTree = "<group>"; };
+		DDAC073E1DABFBBF009DEB54 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		DDB539FD1E0C693E0004D3B4 /* UniversalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalMethods.swift; sourceTree = "<group>"; };
+		DDC3E7CD1DBEAAA2008565DA /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		DDC3E7E21DBEAF97008565DA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DDE54C4B1DB52188002FC736 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		DDE858111D9879D8008CAFB3 /* FetchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
+		DDE9DD861D8A27A40069F345 /* MBSageGrabber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MBSageGrabber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE9DD891D8A27A40069F345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DDE9DD8B1D8A27A40069F345 /* ViewControllerL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerL.swift; sourceTree = "<group>"; };
+		DDE9DD901D8A27A40069F345 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DDE9DD931D8A27A40069F345 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDE9DD951D8A27A40069F345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDE9DD9A1D8A27A40069F345 /* MBSageGrabberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MBSageGrabberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE9DD9E1D8A27A40069F345 /* MBSageGrabberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSageGrabberTests.swift; sourceTree = "<group>"; };
+		DDE9DDA01D8A27A40069F345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDE9DDA51D8A27A40069F345 /* MBSageGrabberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MBSageGrabberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE9DDA91D8A27A40069F345 /* MBSageGrabberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSageGrabberUITests.swift; sourceTree = "<group>"; };
+		DDE9DDAB1D8A27A40069F345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFF6564BD5DB7BE4BC4A9944 /* Pods-MBSageGrabberUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabberUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabberUITests/Pods-MBSageGrabberUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E1B798F7C45BABEC1C6721F3 /* Pods-MBSageGrabberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabberTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabberTests/Pods-MBSageGrabberTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E9190BD994F1CC41B9EAC047 /* Pods-MBSageGrabber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MBSageGrabber.release.xcconfig"; path = "Pods/Target Support Files/Pods-MBSageGrabber/Pods-MBSageGrabber.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD86E0911DA204B200E85E5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD86E0961DA204B200E85E5E /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD831D8A27A40069F345 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDC3E7E31DBEAF97008565DA /* CoreLocation.framework in Frameworks */,
+				DDAC073F1DABFBBF009DEB54 /* PushKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD971D8A27A40069F345 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFB11A2F370AE2F94C58F137 /* Pods_MBSageGrabberTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DDA21D8A27A40069F345 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33B7A3E741367AA2FE8F83B7 /* Pods_MBSageGrabberUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A051CB08C32A6AD205FEBBAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69A96C7227819C50279F56AC /* Pods-MBSageGrabber.debug.xcconfig */,
+				E9190BD994F1CC41B9EAC047 /* Pods-MBSageGrabber.release.xcconfig */,
+				E1B798F7C45BABEC1C6721F3 /* Pods-MBSageGrabberTests.debug.xcconfig */,
+				5A7EA90FE993536FF0A83DAA /* Pods-MBSageGrabberTests.release.xcconfig */,
+				DFF6564BD5DB7BE4BC4A9944 /* Pods-MBSageGrabberUITests.debug.xcconfig */,
+				7B10E5A4DCF45F14A40B6962 /* Pods-MBSageGrabberUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D0C006B01F625A0CD2A69F44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDC3E7E21DBEAF97008565DA /* CoreLocation.framework */,
+				DDAC073E1DABFBBF009DEB54 /* PushKit.framework */,
+				4C49151344EE18EAB57D5CC0 /* Pods_MBSageGrabber.framework */,
+				C5E5458E8B09A6C152996C13 /* Pods_MBSageGrabberTests.framework */,
+				698B524CA789D8F62C267E93 /* Pods_MBSageGrabberUITests.framework */,
+				DD86E0951DA204B200E85E5E /* NotificationCenter.framework */,
+				DDC3E7CD1DBEAAA2008565DA /* IntentsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD86E0971DA204B200E85E5E /* MBSageGrabberWidget */ = {
+			isa = PBXGroup;
+			children = (
+				DD228A7C1DA7EF11001174D6 /* MBSageGrabberWidget.entitlements */,
+				DD86E0981DA204B200E85E5E /* TodayViewController.swift */,
+				DD86E09A1DA204B200E85E5E /* MainInterface.storyboard */,
+				DD86E09D1DA204B200E85E5E /* Info.plist */,
+			);
+			path = MBSageGrabberWidget;
+			sourceTree = "<group>";
+		};
+		DDE9DD7D1D8A27A40069F345 = {
+			isa = PBXGroup;
+			children = (
+				DD0385A71D9D982400E26041 /* MBSageGrabber-Bridging-Header.h */,
+				DDE9DD881D8A27A40069F345 /* MBSageGrabber */,
+				DD86E0971DA204B200E85E5E /* MBSageGrabberWidget */,
+				DDE9DD9D1D8A27A40069F345 /* MBSageGrabberTests */,
+				DDE9DDA81D8A27A40069F345 /* MBSageGrabberUITests */,
+				DDE9DD871D8A27A40069F345 /* Products */,
+				A051CB08C32A6AD205FEBBAC /* Pods */,
+				D0C006B01F625A0CD2A69F44 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DDE9DD871D8A27A40069F345 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDE9DD861D8A27A40069F345 /* MBSageGrabber.app */,
+				DDE9DD9A1D8A27A40069F345 /* MBSageGrabberTests.xctest */,
+				DDE9DDA51D8A27A40069F345 /* MBSageGrabberUITests.xctest */,
+				DD86E0941DA204B200E85E5E /* MBSageGrabberWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDE9DD881D8A27A40069F345 /* MBSageGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				DDAABA731D9441C400902820 /* MBSageGrabber.entitlements */,
+				DDE9DD891D8A27A40069F345 /* AppDelegate.swift */,
+				DD43A3FF1E10E96B005256DC /* ViewControllerB.swift */,
+				DDE9DD8B1D8A27A40069F345 /* ViewControllerL.swift */,
+				DD2532421DC6966D007E131B /* ViewControllerD.swift */,
+				DDE54C4B1DB52188002FC736 /* SettingsVC.swift */,
+				DD5771A91DAEBC5900ABA52C /* Main.storyboard */,
+				DDE9DD901D8A27A40069F345 /* Assets.xcassets */,
+				DDE9DD921D8A27A40069F345 /* LaunchScreen.storyboard */,
+				DDE9DD951D8A27A40069F345 /* Info.plist */,
+				DDE858111D9879D8008CAFB3 /* FetchData.swift */,
+				DDB539FD1E0C693E0004D3B4 /* UniversalMethods.swift */,
+			);
+			path = MBSageGrabber;
+			sourceTree = "<group>";
+		};
+		DDE9DD9D1D8A27A40069F345 /* MBSageGrabberTests */ = {
+			isa = PBXGroup;
+			children = (
+				DDE9DD9E1D8A27A40069F345 /* MBSageGrabberTests.swift */,
+				DDE9DDA01D8A27A40069F345 /* Info.plist */,
+			);
+			path = MBSageGrabberTests;
+			sourceTree = "<group>";
+		};
+		DDE9DDA81D8A27A40069F345 /* MBSageGrabberUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DDE9DDA91D8A27A40069F345 /* MBSageGrabberUITests.swift */,
+				DDE9DDAB1D8A27A40069F345 /* Info.plist */,
+			);
+			path = MBSageGrabberUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD86E0931DA204B200E85E5E /* MBSageGrabberWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD86E0A31DA204B300E85E5E /* Build configuration list for PBXNativeTarget "MBSageGrabberWidget" */;
+			buildPhases = (
+				DD86E0901DA204B200E85E5E /* Sources */,
+				DD86E0911DA204B200E85E5E /* Frameworks */,
+				DD86E0921DA204B200E85E5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MBSageGrabberWidget;
+			productName = MBSageGrabberWidget;
+			productReference = DD86E0941DA204B200E85E5E /* MBSageGrabberWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		DDE9DD851D8A27A40069F345 /* MBSageGrabber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDE9DDAE1D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabber" */;
+			buildPhases = (
+				7F6C7ADB25AF96715B4F32E7 /* [CP] Check Pods Manifest.lock */,
+				DDE9DD821D8A27A40069F345 /* Sources */,
+				DDE9DD831D8A27A40069F345 /* Frameworks */,
+				DDE9DD841D8A27A40069F345 /* Resources */,
+				5AB8633BE5FECB7C64A0A716 /* [CP] Embed Pods Frameworks */,
+				9EFFF634815F8F14818B8D0F /* [CP] Copy Pods Resources */,
+				DD86E0A41DA204B300E85E5E /* Embed App Extensions */,
+				DD16735B1E104D1900D76539 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD86E09F1DA204B200E85E5E /* PBXTargetDependency */,
+			);
+			name = MBSageGrabber;
+			productName = MBSageGrabber;
+			productReference = DDE9DD861D8A27A40069F345 /* MBSageGrabber.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DDE9DD991D8A27A40069F345 /* MBSageGrabberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDE9DDB11D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabberTests" */;
+			buildPhases = (
+				7FC6CF4AA3A68621F68BC714 /* [CP] Check Pods Manifest.lock */,
+				DDE9DD961D8A27A40069F345 /* Sources */,
+				DDE9DD971D8A27A40069F345 /* Frameworks */,
+				DDE9DD981D8A27A40069F345 /* Resources */,
+				6DA84F67DECB8A01FEC1A5C8 /* [CP] Embed Pods Frameworks */,
+				3CB56B493736915901CB74CB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDE9DD9C1D8A27A40069F345 /* PBXTargetDependency */,
+			);
+			name = MBSageGrabberTests;
+			productName = MBSageGrabberTests;
+			productReference = DDE9DD9A1D8A27A40069F345 /* MBSageGrabberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DDE9DDA41D8A27A40069F345 /* MBSageGrabberUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDE9DDB41D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabberUITests" */;
+			buildPhases = (
+				3D141BAD5D1BF49718D99457 /* [CP] Check Pods Manifest.lock */,
+				DDE9DDA11D8A27A40069F345 /* Sources */,
+				DDE9DDA21D8A27A40069F345 /* Frameworks */,
+				DDE9DDA31D8A27A40069F345 /* Resources */,
+				9B47CC40E094A98A071775B9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDE9DDA71D8A27A40069F345 /* PBXTargetDependency */,
+			);
+			name = MBSageGrabberUITests;
+			productName = MBSageGrabberUITests;
+			productReference = DDE9DDA51D8A27A40069F345 /* MBSageGrabberUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDE9DD7E1D8A27A40069F345 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = kentahallis;
+				TargetAttributes = {
+					DD86E0931DA204B200E85E5E = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 6UEYNP4T2Q;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					DDE9DD851D8A27A40069F345 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 6UEYNP4T2Q;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+					DDE9DD991D8A27A40069F345 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+						TestTargetID = DDE9DD851D8A27A40069F345;
+					};
+					DDE9DDA41D8A27A40069F345 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+						TestTargetID = DDE9DD851D8A27A40069F345;
+					};
+				};
+			};
+			buildConfigurationList = DDE9DD811D8A27A40069F345 /* Build configuration list for PBXProject "MBSageGrabber" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DDE9DD7D1D8A27A40069F345;
+			productRefGroup = DDE9DD871D8A27A40069F345 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDE9DD851D8A27A40069F345 /* MBSageGrabber */,
+				DDE9DD991D8A27A40069F345 /* MBSageGrabberTests */,
+				DDE9DDA41D8A27A40069F345 /* MBSageGrabberUITests */,
+				DD86E0931DA204B200E85E5E /* MBSageGrabberWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD86E0921DA204B200E85E5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD86E09C1DA204B200E85E5E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD841D8A27A40069F345 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD5771AB1DAEBC5900ABA52C /* Main.storyboard in Resources */,
+				DDE9DD941D8A27A40069F345 /* LaunchScreen.storyboard in Resources */,
+				DDE9DD911D8A27A40069F345 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD981D8A27A40069F345 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DDA31D8A27A40069F345 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CB56B493736915901CB74CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBSageGrabberTests/Pods-MBSageGrabberTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D141BAD5D1BF49718D99457 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5AB8633BE5FECB7C64A0A716 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBSageGrabber/Pods-MBSageGrabber-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DA84F67DECB8A01FEC1A5C8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBSageGrabberTests/Pods-MBSageGrabberTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F6C7ADB25AF96715B4F32E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7FC6CF4AA3A68621F68BC714 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9B47CC40E094A98A071775B9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBSageGrabberUITests/Pods-MBSageGrabberUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EFFF634815F8F14818B8D0F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBSageGrabber/Pods-MBSageGrabber-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD86E0901DA204B200E85E5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD05A3EF1DAD0AFF00CA8EAB /* FetchData.swift in Sources */,
+				DDF3FBB91E0E425100F29C49 /* UniversalMethods.swift in Sources */,
+				DD86E0991DA204B200E85E5E /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD821D8A27A40069F345 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE9DD8C1D8A27A40069F345 /* ViewControllerL.swift in Sources */,
+				DD43A4001E10E96B005256DC /* ViewControllerB.swift in Sources */,
+				DDB539FE1E0C693E0004D3B4 /* UniversalMethods.swift in Sources */,
+				DD2532431DC6966D007E131B /* ViewControllerD.swift in Sources */,
+				DDE54C4C1DB52188002FC736 /* SettingsVC.swift in Sources */,
+				DDE858121D9879D8008CAFB3 /* FetchData.swift in Sources */,
+				DDE9DD8A1D8A27A40069F345 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DD961D8A27A40069F345 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE9DD9F1D8A27A40069F345 /* MBSageGrabberTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE9DDA11D8A27A40069F345 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE9DDAA1D8A27A40069F345 /* MBSageGrabberUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD86E09F1DA204B200E85E5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD86E0931DA204B200E85E5E /* MBSageGrabberWidget */;
+			targetProxy = DD86E09E1DA204B200E85E5E /* PBXContainerItemProxy */;
+		};
+		DDE9DD9C1D8A27A40069F345 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDE9DD851D8A27A40069F345 /* MBSageGrabber */;
+			targetProxy = DDE9DD9B1D8A27A40069F345 /* PBXContainerItemProxy */;
+		};
+		DDE9DDA71D8A27A40069F345 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDE9DD851D8A27A40069F345 /* MBSageGrabber */;
+			targetProxy = DDE9DDA61D8A27A40069F345 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DD5771A91DAEBC5900ABA52C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD5771AA1DAEBC5900ABA52C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DD86E09A1DA204B200E85E5E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD86E09B1DA204B200E85E5E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		DDE9DD921D8A27A40069F345 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDE9DD931D8A27A40069F345 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD86E0A11DA204B300E85E5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = MBSageGrabberWidget/MBSageGrabberWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6UEYNP4T2Q;
+				INFOPLIST_FILE = MBSageGrabberWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabber.MBSageGrabberWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DD86E0A21DA204B300E85E5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = MBSageGrabberWidget/MBSageGrabberWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6UEYNP4T2Q;
+				INFOPLIST_FILE = MBSageGrabberWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabber.MBSageGrabberWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DDE9DDAC1D8A27A40069F345 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kent Hall (P7W3EBMRMF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DDE9DDAD1D8A27A40069F345 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kent Hall (6UEYNP4T2Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DDE9DDAF1D8A27A40069F345 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69A96C7227819C50279F56AC /* Pods-MBSageGrabber.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MBSageGrabber/MBSageGrabber.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6UEYNP4T2Q;
+				INFOPLIST_FILE = MBSageGrabber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabber;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MBSageGrabber-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DDE9DDB01D8A27A40069F345 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9190BD994F1CC41B9EAC047 /* Pods-MBSageGrabber.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MBSageGrabber/MBSageGrabber.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6UEYNP4T2Q;
+				INFOPLIST_FILE = MBSageGrabber/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabber;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MBSageGrabber-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DDE9DDB21D8A27A40069F345 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1B798F7C45BABEC1C6721F3 /* Pods-MBSageGrabberTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MBSageGrabberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MBSageGrabber.app/MBSageGrabber";
+			};
+			name = Debug;
+		};
+		DDE9DDB31D8A27A40069F345 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A7EA90FE993536FF0A83DAA /* Pods-MBSageGrabberTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MBSageGrabberTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabberTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MBSageGrabber.app/MBSageGrabber";
+			};
+			name = Release;
+		};
+		DDE9DDB51D8A27A40069F345 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFF6564BD5DB7BE4BC4A9944 /* Pods-MBSageGrabberUITests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = MBSageGrabberUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabberUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MBSageGrabber;
+			};
+			name = Debug;
+		};
+		DDE9DDB61D8A27A40069F345 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B10E5A4DCF45F14A40B6962 /* Pods-MBSageGrabberUITests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = MBSageGrabberUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.calamity.MBSageGrabberUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MBSageGrabber;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD86E0A31DA204B300E85E5E /* Build configuration list for PBXNativeTarget "MBSageGrabberWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD86E0A11DA204B300E85E5E /* Debug */,
+				DD86E0A21DA204B300E85E5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE9DD811D8A27A40069F345 /* Build configuration list for PBXProject "MBSageGrabber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE9DDAC1D8A27A40069F345 /* Debug */,
+				DDE9DDAD1D8A27A40069F345 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE9DDAE1D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE9DDAF1D8A27A40069F345 /* Debug */,
+				DDE9DDB01D8A27A40069F345 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE9DDB11D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE9DDB21D8A27A40069F345 /* Debug */,
+				DDE9DDB31D8A27A40069F345 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE9DDB41D8A27A40069F345 /* Build configuration list for PBXNativeTarget "MBSageGrabberUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE9DDB51D8A27A40069F345 /* Debug */,
+				DDE9DDB61D8A27A40069F345 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DDE9DD7E1D8A27A40069F345 /* Project object */;
+}

@@ -1,0 +1,6 @@
+framework module Pods_MBSageGrabberUITests {
+  umbrella header "Pods-MBSageGrabberUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

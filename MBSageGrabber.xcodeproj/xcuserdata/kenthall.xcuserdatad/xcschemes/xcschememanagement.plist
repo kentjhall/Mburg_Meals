@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>MBSageGrabber.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>MBSageGrabberIntents.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>MBSageGrabberIntentsUI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MBSageGrabberWatch (Complication).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>MBSageGrabberWatch (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>MBSageGrabberWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>MBSageGrabberWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>DD1673321E104D1900D76539</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD86E0931DA204B200E85E5E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDC3E7C21DBEAAA2008565DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDC3E7CB1DBEAAA2008565DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDE9DD851D8A27A40069F345</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDE9DD991D8A27A40069F345</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDE9DDA41D8A27A40069F345</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

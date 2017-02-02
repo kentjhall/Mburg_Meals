@@ -1,0 +1,6 @@
+framework module Pods_MBSageGrabber {
+  umbrella header "Pods-MBSageGrabber-umbrella.h"
+
+  export *
+  module * { export * }
+}
