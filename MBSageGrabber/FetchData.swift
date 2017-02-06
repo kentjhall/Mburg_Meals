@@ -126,6 +126,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + timeout){
             if (self.defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
+                print(self.defaults.integer(forKey: "Day"))
                 webView.stopLoading()
                 loadWheel.stopAnimating()
                 refreshControl.endRefreshing()

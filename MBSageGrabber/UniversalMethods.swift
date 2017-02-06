@@ -99,7 +99,7 @@ class UniversalMethods{
         if (defaults.integer(forKey: "DaysForward") != 0){
             UniversalMethods.selMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
         }
-        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled {
+        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled && !mealTitleLabel.isHidden {
             UniversalMethods.nextMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
         }
     }
