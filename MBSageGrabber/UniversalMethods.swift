@@ -96,7 +96,7 @@ class UniversalMethods{
         if (defaults.string(forKey: mealType.rawValue) != nil){
             UniversalMethods.setMealLabel(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, navigationItem: navigationItem, loadWheelVC: loadWheel, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, defaults: defaults, resNavItem: false, text: defaults.string(forKey: mealType.rawValue)!)
         }
-        if (defaults.integer(forKey: "DaysForward") != 0){
+        if (defaults.integer(forKey: "DaysForward") != 0 || defaults.bool(forKey: "ShowingTomorrow")){
             UniversalMethods.selMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
         }
         
