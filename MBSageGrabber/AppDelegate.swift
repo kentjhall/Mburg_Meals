@@ -92,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
         defaults?.mutableSetValue(forKey: "DaysForward")
         //for days ahead with notifications
         defaults?.mutableSetValue(forKey: "DaysFurtherFuture")
+        defaults?.mutableSetValue(forKey: "ShowingTomorrow")
         defaults?.mutableSetValue(forKey: "WebRefreshedToday")
     }
 

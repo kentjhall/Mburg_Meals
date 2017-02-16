@@ -99,12 +99,19 @@ class UniversalMethods{
         if (defaults.integer(forKey: "DaysForward") != 0){
             UniversalMethods.selMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
         }
-        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled && !mealTitleLabel.isHidden && defaults.string(forKey: mealType.rawValue) != nil {
+        
+        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled && !mealTitleLabel.isHidden && defaults.string(forKey: mealType.rawValue) != nil && !defaults.bool(forKey: "ShowingTomorrow") {
             UniversalMethods.nextMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
+            defaults.set(true, forKey: "ShowingTomorrow")
+        }
+        else if NSCalendar.current.component(Calendar.Component.hour, from: Date()) < 19 && prevButton.isEnabled && defaults.bool(forKey: "ShowingTomorrow") {
+            prevMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, refreshControl: refreshControl, loadWheel: loadWheel, mealType: mealType)
+            defaults.set(false, forKey: "ShowingTomorrow")
         }
     }
     
     static func refreshAction(defaults: UserDefaults, fetchData: inout FetchData, prevButton: UIBarButtonItem, nextButton: UIBarButtonItem, dateLabel: UILabel, navigationItem: UINavigationItem, mealTitleLabel: UILabel, mealLabel: UILabel, loadWheel: UIActivityIndicatorView, refreshControl: UIRefreshControl, subView: UIView, tableView: UITableView, mealType: FetchData.MealType) {
+        defaults.set(false, forKey: "ShowingTomorrow")
         defaults.set(0, forKey: "DaysForward")
         UniversalMethods.loadDataVC(fetchData: &fetchData, prevButton: prevButton, nextButton: nextButton, defaults: defaults, dateLabel: dateLabel, navigationItem: navigationItem, mealTitleLabel: mealTitleLabel, mealLabel: mealLabel, loadWheel: loadWheel, refreshControl: refreshControl, subView: subView, tableView: tableView, mealType: mealType)
         if (fetchData.defaults.integer(forKey: "Day") == NSCalendar.current.component(Calendar.Component.day, from: Date()) || !UniversalMethods.connectedToNetwork()){
@@ -119,9 +126,6 @@ class UniversalMethods{
         var daysForward = defaults.integer(forKey: "DaysForward")
         if (daysForward>=1){
             daysForward -= 1
-            //            if (defaults.integer(forKey: "Day")+daysForward == Calendar.current.component(Calendar.Component.day, from: Calendar.current.date(byAdding: .day, value: daysForward, to: Date())!)){
-            //                dateLabel.text = "*\(UniversalMethods.weekDayToString(date: Calendar.current.date(byAdding: .day, value: daysForward, to: Date())!)) \(UniversalMethods.monthToShortString(date: Calendar.current.date(byAdding: .day, value: daysForward, to: Date())!)) \(UniversalMethods.dayWithEnding(date: Calendar.current.date(byAdding: .day, value: daysForward, to: Date())!))"
-            //            }
             dateLabel.text = "*" + incDateString(by: daysForward, to: tempDate)
             if (daysForward==0){
                 prevButton.isEnabled=false
@@ -148,6 +152,7 @@ class UniversalMethods{
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: defaults.string(forKey: "\(mealType.rawValue)")!)
             }
         }
+        defaults.set(false, forKey: "ShowingTomorrow")
         defaults.set(daysForward, forKey: "DaysForward")
     }
     
@@ -176,6 +181,7 @@ class UniversalMethods{
                 navigationItem.prompt = "Loading..."
             }
         }
+        defaults.set(false, forKey: "ShowingTomorrow")
         defaults.set(daysForward, forKey: "DaysForward")
     }
     
