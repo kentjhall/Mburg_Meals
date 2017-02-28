@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
         defaults?.mutableSetValue(forKey: "DaysFurtherFuture")
         defaults?.mutableSetValue(forKey: "ShowingTomorrow")
         defaults?.mutableSetValue(forKey: "WebRefreshedToday")
+        defaults?.mutableSetValue(forKey: "IsLoading")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

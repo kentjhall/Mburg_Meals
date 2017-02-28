@@ -68,8 +68,9 @@ class UniversalMethods{
         dateLabel.text = defaults.string(forKey: "Date")
         navigationItem.prompt = defaults.string(forKey: "navItemPromptU")
         if (UniversalMethods.connectedToNetwork()){
+            fetchData.webView?.stopLoading()
+            fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel:dateLabel, loadWheel:loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton:prevButton, nextButton:nextButton, subView:subView, tableView:tableView, jsExec: "", jsExecCount: 0, mealType: mealType)
             if (defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
-                fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel:dateLabel, loadWheel:loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton:prevButton, nextButton:nextButton, subView:subView, tableView:tableView, jsExec: "", jsExecCount: 0, mealType: mealType)
                 if (mealTitleLabel.isHidden){
                     mealLabel.isHidden = true
                     dateLabel.isHidden = true
@@ -145,6 +146,7 @@ class UniversalMethods{
                 fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, loadWheel: loadWheel, refreshControl: refreshControl, navigationItem:navigationItem, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, jsExec: "document.execCommand($('#somDateNavNext').click())", jsExecCount: daysForward, mealType: mealType)
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: "")
                 navigationItem.prompt = "Loading..."
+                loadWheel.startAnimating()
             }
         }
         else if (daysForward<1){
@@ -179,6 +181,7 @@ class UniversalMethods{
                 fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, loadWheel: loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, jsExec: "document.execCommand($('#somDateNavNext').click())", jsExecCount: daysForward, mealType: mealType)
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: "")
                 navigationItem.prompt = "Loading..."
+                loadWheel.startAnimating()
             }
         }
         defaults.set(false, forKey: "ShowingTomorrow")

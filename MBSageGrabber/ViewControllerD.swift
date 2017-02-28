@@ -58,6 +58,7 @@ class ViewControllerD: UIViewController{
         mealTitleLabel.isHidden = true
         mealLabel.isHidden = true
         dateLabel.isHidden = true
+        defaults.set(false, forKey: "IsLoading")
         UniversalMethods.loadDataVC(fetchData: &fetchData, prevButton: prevButton, nextButton: nextButton, defaults: defaults, dateLabel: dateLabel, navigationItem: navigationItem, mealTitleLabel: mealTitleLabel, mealLabel: mealLabel, loadWheel: loadWheel, refreshControl: refreshControl, subView: subView, tableView: tableView, mealType: mealType)
     }
     

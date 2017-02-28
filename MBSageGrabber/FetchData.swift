@@ -59,6 +59,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         self.webView = webView
         webView.load(req)
         timeout=0;
+        defaults.set(true, forKey: "IsLoading")
         NSLog("load initiated")
     }
     
@@ -83,6 +84,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         webView.load(req)
         isWidget = true
         timeout=10;
+        defaults.set(true, forKey: "IsLoading")
     }
     
     func initLoad(mealLabel:UILabel, mealTitleLabel:UILabel, dateLabel:UILabel, loadWheel:UIActivityIndicatorView, refreshControl:UIRefreshControl, navigationItem:UINavigationItem, prevButton:UIBarButtonItem, nextButton:UIBarButtonItem, subView:UIView, tableView:UITableView, jsExec:String, jsExecCount:Int, mealType:MealType){
@@ -108,6 +110,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         self.webView = webView
         webView.load(req)
         timeout=10;
+        defaults.set(true, forKey: "IsLoading")
         
         switch mealType {
             case MealType.BREAKFAST:
@@ -126,8 +129,6 @@ class FetchData: NSObject, WKNavigationDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + timeout){
             if (self.defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
-                print(self.defaults.integer(forKey: "Day"))
-                webView.stopLoading()
                 loadWheel.stopAnimating()
                 refreshControl.endRefreshing()
                 self.defaults.set("Error | Pull to Refresh", forKey: "navItemPromptU")
@@ -159,7 +160,7 @@ class FetchData: NSObject, WKNavigationDelegate {
                             if (self.jsExec=="" && self.defaults.integer(forKey: "DaysForward") == 0){
                                 UniversalMethods.setMealLabel(mealLabel: self.lunchLabel!, mealTitleLabel: self.lunchTitleLabel!, dateLabel: self.dateLabel!, navigationItem: self.navigationItem!, loadWheelVC: self.loadWheelVC!, prevButton: self.prevButton!, nextButton: self.nextButton!, subView: self.subView, tableView: self.tableView, defaults: self.defaults, resNavItem: true, text: mealString)
                             }
-                            else if self.defaults.integer(forKey: "DaysForward") == 0{
+                            else if self.jsExecCount>0 {
                                 UniversalMethods.setMealLabel(mealLabel: self.lunchLabel!, navigationItem: self.navigationItem, subView: self.subView!, tableView: self.tableView!, text: mealString)
                             }
                         }
@@ -177,24 +178,6 @@ class FetchData: NSObject, WKNavigationDelegate {
                         self.defaults.set(0, forKey: "DaysFurtherFuture")
                         self.defaults.set(true, forKey: "WebRefreshedToday")
                     }
-                    if (self.jsExec==""){
-                        for i in 1...7{
-                            webView.evaluateJavaScript("document.execCommand($('#somDateNavNext').click())", completionHandler: nil)
-                            webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                                doneLoading = self.htmlToString(html: html)
-                                if (doneLoading){
-                                    self.htmlStringToMenu(meal: "Lunch\(i)")
-                                }
-                                else{
-                                    self.defaults.setValue(nil, forKey: "Lunch\(i)")
-                                }
-                                //self.defaults.setValue(nil, forKey: "Lunch\(1)")
-                            })
-                        }
-                        for _ in 1...7{
-                            webView.evaluateJavaScript("document.execCommand($('#somDateNavPrev').click())", completionHandler: nil)
-                        }
-                    }
                     webView.evaluateJavaScript("document.execCommand($('#somMealNavItem2').click())", completionHandler: nil)
                     webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
                         doneLoading = self.htmlToString(html: html)
@@ -206,36 +189,17 @@ class FetchData: NSObject, WKNavigationDelegate {
                                 mealString = self.htmlStringToMenu(meal: "Dinner")
                             }
 
-                                if (self.updateLabels && (self.dinnerLabel != nil)){
+                            if (self.updateLabels && (self.dinnerLabel != nil)){
                                 if (self.subView != nil && self.tableView != nil){
                                     if (self.jsExec=="" && self.defaults.integer(forKey: "DaysForward") == 0){
                                         UniversalMethods.setMealLabel(mealLabel: self.dinnerLabel!, mealTitleLabel: self.dinnerTitleLabel!, dateLabel: self.dateLabel!, navigationItem: self.navigationItem!, loadWheelVC: self.loadWheelVC!, prevButton: self.prevButton!, nextButton: self.nextButton!, subView: self.subView, tableView: self.tableView, defaults: self.defaults, resNavItem: true, text: mealString)
                                     }
-                                    else if self.defaults.integer(forKey: "DaysForward") == 0{
+                                    else if self.jsExecCount>0 {
                                         UniversalMethods.setMealLabel(mealLabel: self.dinnerLabel!, navigationItem: self.navigationItem, subView: self.subView!, tableView: self.tableView!, text: mealString)
                                     }
-
                                 }
                                 else{
                                     UniversalMethods.setMealLabel(mealLabel: self.dinnerLabel!, navigationItem: self.navigationItem, subView: nil, tableView: nil, text: mealString)
-                                }
-                            }
-                            if (self.jsExec==""){
-                                for i in 1...7{
-                                    webView.evaluateJavaScript("document.execCommand($('#somDateNavNext').click())", completionHandler: nil)
-                                    webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                                        doneLoading = self.htmlToString(html: html)
-                                        if (doneLoading){
-                                            self.htmlStringToMenu(meal: "Dinner\(i)")
-                                        }
-                                        else{
-                                            self.defaults.setValue(nil, forKey: "Dinner\(i)")
-                                        }
-                                        //self.defaults.setValue(nil, forKey: "Dinner\()")
-                                    })
-                                }
-                                for _ in 1...7{
-                                    webView.evaluateJavaScript("document.execCommand($('#somDateNavPrev').click())", completionHandler: nil)
                                 }
                             }
                         }
@@ -255,7 +219,7 @@ class FetchData: NSObject, WKNavigationDelegate {
                                         if (self.jsExec=="" && self.defaults.integer(forKey: "DaysForward") == 0){
                                             UniversalMethods.setMealLabel(mealLabel: self.breakfastLabel!, mealTitleLabel: self.breakfastTitleLabel!, dateLabel: self.dateLabel!, navigationItem: self.navigationItem!, loadWheelVC: self.loadWheelVC!, prevButton: self.prevButton!, nextButton: self.nextButton!, subView: self.subView, tableView: self.tableView, defaults: self.defaults, resNavItem: true, text: mealString)
                                         }
-                                        else if self.defaults.integer(forKey: "DaysForward") == 0{
+                                        else if self.jsExecCount>0 {
                                             UniversalMethods.setMealLabel(mealLabel: self.breakfastLabel!, navigationItem: self.navigationItem, subView: self.subView!, tableView: self.tableView!, text: mealString)
                                         }
                                         
@@ -265,26 +229,55 @@ class FetchData: NSObject, WKNavigationDelegate {
                                     }
                                 }
                                 if (self.jsExec==""){
-                                    for i in 1...7{
+                                    var lastHtml = ["", "", ""]
+                                    for i in 1...7 {
                                         webView.evaluateJavaScript("document.execCommand($('#somDateNavNext').click())", completionHandler: nil)
-                                        webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                                            doneLoading = self.htmlToString(html: html)
-                                            if (doneLoading){
-                                                self.htmlStringToMenu(meal: "Breakfast\(i)")
+                                        for j in 0...2{
+                                            var mealString = ""
+                                            switch j {
+                                            case 0:
+                                                mealString = "Breakfast"
+                                                break
+                                            case 1:
+                                                mealString = "Lunch"
+                                                break
+                                            case 2:
+                                                mealString = "Dinner"
+                                                break
+                                            default:
+                                                mealString = ""
                                             }
-                                            else{
-                                                self.defaults.setValue(nil, forKey: "Breakfast\(i)")
-                                            }
-                                        })
-                                    }
-                                    for _ in 1...7{
-                                        webView.evaluateJavaScript("document.execCommand($('#somDateNavPrev').click())", completionHandler: nil)
+                                            webView.evaluateJavaScript("document.execCommand($('#somMealNavItem\(j)').click())", completionHandler: nil)
+                                            webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
+                                                let htmlString = html != nil ? html! as! String : ""
+                                                doneLoading = self.htmlToString(html: html)
+                                                if htmlString == lastHtml[j] {
+                                                    self.htmlToString(html: "")
+                                                }
+                                                lastHtml[j] = htmlString
+                                                if doneLoading{
+                                                    self.htmlStringToMenu(meal: "\(mealString)\(i)")
+                                                }
+                                                else{
+                                                    self.defaults.setValue(nil, forKey: "\(mealString)\(i)")
+                                                }
+                                                /**** TESTING ****/
+//                                                self.defaults.setValue(nil, forKey: "Lunch\(3)")
+//                                                self.defaults.setValue(nil, forKey: "Dinner\(3)")
+//                                                self.defaults.setValue(nil, forKey: "Breakfast\(3)")
+                                                /**** TESTING ****/
+                                            })
+                                        }
                                     }
                                 }
                             }
                             
                             self.loadWheelWidget?.stopAnimating()
+                            self.loadWheelVC?.stopAnimating()
                             self.refreshControl?.endRefreshing()
+                            self.defaults.set(nil, forKey: "navItemPromptU")
+                            self.navigationItem?.prompt = self.defaults.string(forKey: "navItemPromptU")
+                            self.defaults.set(false, forKey: "IsLoading")
                             if #available(iOS 10.0, *) {
                                 if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Lunch") != self.noMealString) {
                                     UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "LunchNotifHour"), minute: self.defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: self.noMealString)
@@ -296,7 +289,8 @@ class FetchData: NSObject, WKNavigationDelegate {
                             }
                         })
                     })
-                }else{
+                }
+                else{
                     webView.reload()
                     if (self.loadDelay<2 && self.tries>=2){
                         self.loadDelay+=0.5
@@ -365,7 +359,7 @@ class FetchData: NSObject, WKNavigationDelegate {
     func htmlToString(html:Any?) -> Bool{
         self.items = [""]
         self.mainItem = [""]
-        var htmlString=html! as! String;
+        var htmlString = html != nil ? html! as! String : ""
         let doneLoading = htmlString.contains("<div id=\"menuLoading\" class=\"noDisplay\">")
         htmlString=htmlString.components(separatedBy: "id=\"somDailOfferingsWrapper\"")[0]
         htmlString=htmlString.replacingOccurrences(of: "&amp;", with: "&")
@@ -373,7 +367,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         if (self.items.count > 1){
             self.mainItem=self.items[1].components(separatedBy: "</span>")
         }
-        if (doneLoading && self.mainItem[0]==""){
+        if ((doneLoading || htmlString == "") && self.mainItem[0]==""){
             self.mainItem[0] = noMealString
         }
         NSLog("meal: \(self.mainItem[0])")
