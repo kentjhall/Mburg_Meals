@@ -61,19 +61,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.newData)
         fetchData = FetchData()
         if (UniversalMethods.connectedToNetwork()){
-            if defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date()) {
-                fetchData.initLoad(breakfastLabel: self.breakfastLabel, lunchLabel:self.lunchLabel, dinnerLabel:self.dinnerLabel, dateLabel:self.dateLabel, loadWheel:self.loadWheel)
-            }
+            fetchData.initLoad(breakfastLabel: self.breakfastLabel, lunchLabel:self.lunchLabel, dinnerLabel:self.dinnerLabel, dateLabel:self.dateLabel, loadWheel:self.loadWheel)
             self.breakfastLabel.text = defaults.string(forKey: "Breakfast")?.components(separatedBy: "<")[0]
             self.lunchLabel.text = defaults.string(forKey: "Lunch")?.components(separatedBy: "<")[0]
             self.dinnerLabel.text = defaults.string(forKey: "Dinner")?.components(separatedBy: "<")[0]
             self.dateLabel.text = defaults.string(forKey: "Date")
             
-            if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && (defaults.string(forKey: "Breakfast1") != nil) && (defaults.string(forKey: "Lunch1") != nil) && (defaults.string(forKey: "Dinner1") != nil) {
+            if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && (defaults.string(forKey: "Breakfast1") != nil) && (defaults.string(forKey: "Lunch1") != nil) && (defaults.string(forKey: "Dinner1") != nil) && defaults.string(forKey: "Date1") != nil && defaults.integer(forKey: "Day") == NSCalendar.current.component(.day, from: Date()) {
                 self.breakfastLabel.text = defaults.string(forKey: "Breakfast1")?.components(separatedBy: "<")[0]
                 self.lunchLabel.text = defaults.string(forKey: "Lunch1")?.components(separatedBy: "<")[0]
                 self.dinnerLabel.text = defaults.string(forKey: "Dinner1")?.components(separatedBy: "<")[0]
-                self.dateLabel.text = "*" + UniversalMethods.incDateString(by: 1, to: UniversalMethods.dateFromDefaults(defaults: defaults)) + " (Tomorrow)"
+                self.dateLabel.text = "*" + defaults.string(forKey: "Date1")! + " (Tomorrow)"
             }
         }
         else{

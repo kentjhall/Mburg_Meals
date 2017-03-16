@@ -21,7 +21,7 @@ class SettingsVC: UIViewController{
             if (NSCalendar.current.component(Calendar.Component.hour, from: Date()) < defaults.integer(forKey: "LunchNotifHour") || (NSCalendar.current.component(Calendar.Component.hour, from: Date()) == defaults.integer(forKey: "LunchNotifHour") && NSCalendar.current.component(Calendar.Component.minute, from: Date()) < defaults.integer(forKey: "LunchNotifMin"))) {
                 if #available(iOS 10.0, *) {
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["lunchRequest"])
-                    UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString)
+                    UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString, defaults: self.defaults)
                 }
             }
         case false:
@@ -39,7 +39,7 @@ class SettingsVC: UIViewController{
             if (NSCalendar.current.component(Calendar.Component.hour, from: Date()) < defaults.integer(forKey: "DinnerNotifHour") || (NSCalendar.current.component(Calendar.Component.hour, from: Date()) == defaults.integer(forKey: "DinnerNotifHour") && NSCalendar.current.component(Calendar.Component.minute, from: Date()) < defaults.integer(forKey: "DinnerNotifMin"))) {
                 if #available(iOS 10.0, *) {
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dinnerRequest"])
-                    UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString)
+                    UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString, defaults: self.defaults)
                 }
             }
         case false:
@@ -56,7 +56,7 @@ class SettingsVC: UIViewController{
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["lunchRequest"])
             if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults)) {
-                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString)
+                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString, defaults: self.defaults)
             }
         }
     }
@@ -67,7 +67,7 @@ class SettingsVC: UIViewController{
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dinnerRequest"])
             if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults)) {
-                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString)
+                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString, defaults: self.defaults)
             }
         }
     }
@@ -88,14 +88,14 @@ class SettingsVC: UIViewController{
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["lunchRequest"])
             if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults)) {
-                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString)
+                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "LunchNotifHour"), minute: defaults.integer(forKey: "LunchNotifMin"), text: defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: FetchData().noMealString, defaults: self.defaults)
             
             }
         
         
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dinnerRequest"])
             if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults)) {
-                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString)
+                UniversalMethods.addUNNotif(hour: defaults.integer(forKey: "DinnerNotifHour"), minute: defaults.integer(forKey: "DinnerNotifMin"), text: defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: FetchData().noMealString, defaults: self.defaults)
             }
             
         }

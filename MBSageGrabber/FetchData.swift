@@ -42,6 +42,7 @@ class FetchData: NSObject, WKNavigationDelegate {
     let labelWidth = Int(UIScreen.main.bounds.width*0.9146666667)
     var jsExec:String = ""
     var jsExecCount:Int = 0
+    var htmlDate:Date?
     var mealType:MealType?
     enum MealType:String {
         case BREAKFAST = "Breakfast"
@@ -74,7 +75,7 @@ class FetchData: NSObject, WKNavigationDelegate {
         self.dateLabel = dateLabel
         updateLabels = true
         
-        if (defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
+        if self.defaults.integer(forKey: "DayLastUpdate") != NSCalendar.current.component(Calendar.Component.day, from: Date()) {
             self.loadWheelWidget?.startAnimating()
         }
         cycleFutureMeals()
@@ -128,11 +129,13 @@ class FetchData: NSObject, WKNavigationDelegate {
         }
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + timeout){
-            if (self.defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
+            if self.defaults.integer(forKey: "DayLastUpdate") != NSCalendar.current.component(Calendar.Component.day, from: Date()) {
+                if refreshControl.isRefreshing || loadWheel.isAnimating {
+                    self.defaults.set("Error | Pull to Refresh", forKey: "navItemPromptU")
+                    navigationItem.prompt = self.defaults.string(forKey: "navItemPromptU")
+                }
                 loadWheel.stopAnimating()
                 refreshControl.endRefreshing()
-                self.defaults.set("Error | Pull to Refresh", forKey: "navItemPromptU")
-                navigationItem.prompt = self.defaults.string(forKey: "navItemPromptU")
             }
         }
     }
@@ -146,7 +149,7 @@ class FetchData: NSObject, WKNavigationDelegate {
                 }
             }
             webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                var doneLoading = self.htmlToString(html: html)
+                var doneLoading = self.htmlToString(html: html, daysAhead: 0).doneLoading
                 if (doneLoading){
                     var mealString:String
                     if (self.jsExecCount>0){
@@ -168,19 +171,32 @@ class FetchData: NSObject, WKNavigationDelegate {
                             UniversalMethods.setMealLabel(mealLabel: self.lunchLabel!, navigationItem: self.navigationItem, subView: nil, tableView: nil, text: mealString)
                         }
                     }
-                    if (self.updateLabels && self.jsExec == "" && (self.defaults.integer(forKey: "DaysForward") == 0 || self.isWidget)){
-                        self.dateLabel?.text = "\(UniversalMethods.weekDayToString(date: Date())) \(UniversalMethods.monthToShortString(date: Date())) \(UniversalMethods.dayWithEnding(date: Date()))"
+                    if (self.updateLabels && self.jsExec == "" && self.htmlDate != nil && (self.defaults.integer(forKey: "DaysForward") == 0 || self.isWidget)){
+                        let date = self.htmlDate!
+                        self.dateLabel?.text = "\(UniversalMethods.weekDayToString(date: date)) \(UniversalMethods.monthToShortString(date: date)) \(UniversalMethods.dayWithEnding(date: date))"
                     }
-                    if self.jsExec==""{
-                        self.defaults.setValue("\(UniversalMethods.weekDayToString(date: Date())) \(UniversalMethods.monthToShortString(date: Date())) \(UniversalMethods.dayWithEnding(date: Date()))", forKey: "Date")
-                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.month, from: Date()), forKey: "Month")
-                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: Date()), forKey: "Day")
+                    if self.jsExec=="" && self.htmlDate != nil {
+                        let date = self.htmlDate!
+                        self.defaults.setValue("\(UniversalMethods.weekDayToString(date: date)) \(UniversalMethods.monthToShortString(date: date)) \(UniversalMethods.dayWithEnding(date: date))", forKey: "Date")
+                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.month, from: date), forKey: "Month")
+                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: date), forKey: "Day")
+                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: Date()), forKey: "DayLastUpdate")
+                        self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: Date()), forKey: "MonthLastUpdate")
                         self.defaults.set(0, forKey: "DaysFurtherFuture")
                         self.defaults.set(true, forKey: "WebRefreshedToday")
                     }
+                    if self.jsExecCount > 0 {
+                        if self.htmlDate != nil {
+                            let date = self.htmlDate!
+                            self.defaults.set("\(UniversalMethods.weekDayToString(date: date)) \(UniversalMethods.monthToShortString(date: date)) \(UniversalMethods.dayWithEnding(date: date))", forKey: "Date\(self.jsExecCount)")
+                        }
+                        if self.defaults.string(forKey: "Date\(self.jsExecCount)") != nil {
+                            self.dateLabel?.text = "*" + self.defaults.string(forKey: "Date\(self.jsExecCount)")!
+                        }
+                    }
                     webView.evaluateJavaScript("document.execCommand($('#somMealNavItem2').click())", completionHandler: nil)
                     webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                        doneLoading = self.htmlToString(html: html)
+                        doneLoading = self.htmlToString(html: html, daysAhead: 0).doneLoading
                         if (doneLoading){
                             if (self.jsExecCount>0){
                                 mealString = self.htmlStringToMenu(meal: "Dinner\(self.jsExecCount)")
@@ -205,7 +221,7 @@ class FetchData: NSObject, WKNavigationDelegate {
                         }
                         webView.evaluateJavaScript("document.execCommand($('#somMealNavItem0').click())", completionHandler: nil)
                         webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
-                            doneLoading = self.htmlToString(html: html)
+                            doneLoading = self.htmlToString(html: html, daysAhead: 0).doneLoading
                             if (doneLoading){
                                 if (self.jsExecCount>0){
                                     mealString = self.htmlStringToMenu(meal: "Breakfast\(self.jsExecCount)")
@@ -250,16 +266,24 @@ class FetchData: NSObject, WKNavigationDelegate {
                                             webView.evaluateJavaScript("document.execCommand($('#somMealNavItem\(j)').click())", completionHandler: nil)
                                             webView.evaluateJavaScript("document.body.outerHTML.toString()", completionHandler: { (html: Any?, error: Error?) in
                                                 let htmlString = html != nil ? html! as! String : ""
-                                                doneLoading = self.htmlToString(html: html)
+                                                let retTuple = self.htmlToString(html: html, daysAhead: i)
+                                                doneLoading = retTuple.doneLoading
+                                                let date = retTuple.date
                                                 if htmlString == lastHtml[j] {
-                                                    self.htmlToString(html: "")
+                                                    self.htmlToString(html: "", daysAhead: i)
                                                 }
                                                 lastHtml[j] = htmlString
                                                 if doneLoading{
                                                     self.htmlStringToMenu(meal: "\(mealString)\(i)")
+                                                    if date != nil {
+                                                        self.defaults.set("\(UniversalMethods.weekDayToString(date: date!)) \(UniversalMethods.monthToShortString(date: date!)) \(UniversalMethods.dayWithEnding(date: date!))", forKey: "Date\(i)")
+                                                    }
                                                 }
                                                 else{
                                                     self.defaults.setValue(nil, forKey: "\(mealString)\(i)")
+                                                    if self.jsExecCount == 0 {
+                                                        self.defaults.set(nil, forKey: "Date\(i)")
+                                                    }
                                                 }
                                                 /**** TESTING ****/
 //                                                self.defaults.setValue(nil, forKey: "Lunch\(3)")
@@ -279,13 +303,13 @@ class FetchData: NSObject, WKNavigationDelegate {
                             self.navigationItem?.prompt = self.defaults.string(forKey: "navItemPromptU")
                             self.defaults.set(false, forKey: "IsLoading")
                             if #available(iOS 10.0, *) {
-                                if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Lunch") != self.noMealString) {
-                                    UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "LunchNotifHour"), minute: self.defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: self.noMealString)
+                                if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults)) {
+                                    UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "LunchNotifHour"), minute: self.defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: self.noMealString, defaults: self.defaults)
                                 }
-                                if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Dinner") != self.noMealString) {
-                                    UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "DinnerNotifHour"), minute: self.defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: self.noMealString)
+                                if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults)) {
+                                    UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "DinnerNotifHour"), minute: self.defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: self.noMealString, defaults: self.defaults)
                                 }
-                                 NSLog("Web refresh notifs added")
+                                NSLog("Web refresh notifs added")
                             }
                         })
                     })
@@ -304,28 +328,31 @@ class FetchData: NSObject, WKNavigationDelegate {
     func cycleFutureMeals() {
         let tempDate = UniversalMethods.dateFromDefaults(defaults: defaults)
         let daysFurther = NSCalendar.current.dateComponents([Calendar.Component.day], from: tempDate, to: Date()).day!
-        if daysFurther != 0 {
+        if daysFurther > 0 {
             if (defaults.string(forKey: "Breakfast\(daysFurther)") != nil) && (defaults.string(forKey: "Lunch\(daysFurther)") != nil) && (defaults.string(forKey: "Dinner\(daysFurther)") != nil){
                 movDownMeals(meal: "Breakfast", daysFurther: daysFurther)
                 movDownMeals(meal: "Lunch", daysFurther: daysFurther)
                 movDownMeals(meal: "Dinner", daysFurther: daysFurther)
+                movDownMeals(meal: "Date", daysFurther: daysFurther)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
                     self.refreshControl?.endRefreshing();
                 }
-                self.defaults.setValue("\(UniversalMethods.weekDayToString(date: Date())) \(UniversalMethods.monthToShortString(date: Date())) \(UniversalMethods.dayWithEnding(date: Date()))", forKey: "Date")
+//                self.defaults.setValue("\(UniversalMethods.weekDayToString(date: Date())) \(UniversalMethods.monthToShortString(date: Date())) \(UniversalMethods.dayWithEnding(date: Date()))", forKey: "Date")
                 self.defaults.setValue(NSCalendar.current.component(Calendar.Component.month, from: Date()), forKey: "Month")
                 self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: Date()), forKey: "Day")
+                self.defaults.setValue(NSCalendar.current.component(Calendar.Component.month, from: Date()), forKey: "MonthLastUpdate")
+                self.defaults.setValue(NSCalendar.current.component(Calendar.Component.day, from: Date()), forKey: "DayLastUpdate")
                 
                 dateLabel?.text = defaults.string(forKey: "Date")
                 self.loadWheelVC?.stopAnimating()
                 self.loadWheelWidget?.stopAnimating()
                 
                 if #available(iOS 10.0, *) {
-                    if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Lunch") != self.noMealString && self.defaults.string(forKey: "Lunch") != nil) {
-                        UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "LunchNotifHour"), minute: self.defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: self.noMealString)
+                    if (!UniversalMethods.lunchNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Lunch") != nil) {
+                        UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "LunchNotifHour"), minute: self.defaults.integer(forKey: "LunchNotifMin"), text: self.defaults.string(forKey: "Lunch")!.components(separatedBy: "<")[0], title: "Lunch Today", id: "lunch", noMealString: self.noMealString, defaults: self.defaults)
                     }
-                    if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Dinner") != self.noMealString && self.defaults.string(forKey: "Dinner") != nil) {
-                        UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "DinnerNotifHour"), minute: self.defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: self.noMealString)
+                    if (!UniversalMethods.dinnerNotifPassed(defaults: self.defaults) && self.defaults.string(forKey: "Dinner") != nil) {
+                        UniversalMethods.addUNNotif(hour: self.defaults.integer(forKey: "DinnerNotifHour"), minute: self.defaults.integer(forKey: "DinnerNotifMin"), text: self.defaults.string(forKey: "Dinner")!.components(separatedBy: "<")[0], title: "Dinner Today", id: "dinner", noMealString: self.noMealString, defaults: self.defaults)
                     }
                 }
                 NSLog("Future meals cycled, notifs added")
@@ -356,10 +383,27 @@ class FetchData: NSObject, WKNavigationDelegate {
         }
     }
     
-    func htmlToString(html:Any?) -> Bool{
+    func htmlToString(html:Any?, daysAhead:Int) -> (doneLoading: Bool, date: Date?) {
         self.items = [""]
         self.mainItem = [""]
         var htmlString = html != nil ? html! as! String : ""
+        let htmlDayString:String? = htmlString.components(separatedBy: "id=\"somDateNavDisplay\">").last?.components(separatedBy: "</div>").first?.components(separatedBy: "/").last
+        let htmlMonthString:String? = htmlString.components(separatedBy: "id=\"somDateNavDisplay\">").last?.components(separatedBy: "</div>").first?.components(separatedBy: "/").first
+        let htmlDay:Int? = htmlDayString != nil ? Int(htmlDayString!) : nil
+        let htmlMonth:Int? = htmlMonthString != nil ? Int(htmlMonthString!) : nil
+        if daysAhead == 0 {
+            htmlDate = htmlMonth != nil && htmlDay != nil ? UniversalMethods.dateFromMD(month: htmlMonth!, day: htmlDay!) : nil
+        }
+//        let dateDaysAhead = NSCalendar.current.date(byAdding: .day, value: daysAhead, to: Date())
+//        if htmlDay != nil && htmlDay != NSCalendar.current.component(.day, from: dateDaysAhead!) {
+//            htmlString = "<div id=\"menuLoading\" class=\"noDisplay\">"
+//        }
+//        if htmlDay != nil && daysAhead == 0 && htmlDay != NSCalendar.current.component(.day, from: Date()) {
+//            defaults.set(true, forKey: "NavButtonsDisabled")
+//        }
+//        else if htmlDay != nil && htmlDay == NSCalendar.current.component(.day, from: dateDaysAhead!) {
+//            defaults.set(false, forKey: "NavButtonsDisabled")
+//        }
         let doneLoading = htmlString.contains("<div id=\"menuLoading\" class=\"noDisplay\">")
         htmlString=htmlString.components(separatedBy: "id=\"somDailOfferingsWrapper\"")[0]
         htmlString=htmlString.replacingOccurrences(of: "&amp;", with: "&")
@@ -367,11 +411,11 @@ class FetchData: NSObject, WKNavigationDelegate {
         if (self.items.count > 1){
             self.mainItem=self.items[1].components(separatedBy: "</span>")
         }
-        if ((doneLoading || htmlString == "") && self.mainItem[0]==""){
+        if ((doneLoading || htmlString == "") && self.mainItem[0]=="") {
             self.mainItem[0] = noMealString
         }
         NSLog("meal: \(self.mainItem[0])")
-        return doneLoading
+        return (doneLoading, htmlMonth != nil && htmlDay != nil ? UniversalMethods.dateFromMD(month: htmlMonth!, day: htmlDay!) : nil)
     }
     
     func htmlStringToMenu(meal:String) -> String{

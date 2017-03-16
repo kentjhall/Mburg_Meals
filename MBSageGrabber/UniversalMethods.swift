@@ -38,6 +38,10 @@ class UniversalMethods{
         loadWheelVC.stopAnimating()
         prevButton.isEnabled=false
         nextButton.isEnabled=true
+//        if defaults.bool(forKey: "NavButtonsDisabled") {
+//            prevButton.isEnabled = false
+//            nextButton.isEnabled = false
+//        }
     }
     
     static func setMealLabel(mealLabel:UILabel, navigationItem:UINavigationItem?, subView:UIView?, tableView:UITableView?, text:String){
@@ -70,7 +74,7 @@ class UniversalMethods{
         if (UniversalMethods.connectedToNetwork()){
             fetchData.webView?.stopLoading()
             fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel:dateLabel, loadWheel:loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton:prevButton, nextButton:nextButton, subView:subView, tableView:tableView, jsExec: "", jsExecCount: 0, mealType: mealType)
-            if (defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
+            if defaults.string(forKey: "Date") == nil {
                 if (mealTitleLabel.isHidden){
                     mealLabel.isHidden = true
                     dateLabel.isHidden = true
@@ -101,7 +105,7 @@ class UniversalMethods{
             UniversalMethods.selMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
         }
         
-        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled && !mealTitleLabel.isHidden && defaults.string(forKey: mealType.rawValue) != nil && !defaults.bool(forKey: "ShowingTomorrow") {
+        if NSCalendar.current.component(Calendar.Component.hour, from: Date()) >= 19 && !prevButton.isEnabled && !mealTitleLabel.isHidden && defaults.string(forKey: mealType.rawValue) != nil && !defaults.bool(forKey: "ShowingTomorrow") && defaults.integer(forKey: "Day") == NSCalendar.current.component(.day, from: Date()) {
             UniversalMethods.nextMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, refreshControl: refreshControl, loadWheel: loadWheel, subView: subView, tableView: tableView, mealType: mealType)
             defaults.set(true, forKey: "ShowingTomorrow")
         }
@@ -109,13 +113,17 @@ class UniversalMethods{
             prevMealToLabel(dateLabel: dateLabel, prevButton: prevButton, nextButton: nextButton, defaults: defaults, fetchData: fetchData, mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, refreshControl: refreshControl, loadWheel: loadWheel, mealType: mealType)
             defaults.set(false, forKey: "ShowingTomorrow")
         }
+//        if defaults.bool(forKey: "NavButtonsDisabled") {
+//            prevButton.isEnabled = false
+//            nextButton.isEnabled = false
+//        }
     }
     
     static func refreshAction(defaults: UserDefaults, fetchData: inout FetchData, prevButton: UIBarButtonItem, nextButton: UIBarButtonItem, dateLabel: UILabel, navigationItem: UINavigationItem, mealTitleLabel: UILabel, mealLabel: UILabel, loadWheel: UIActivityIndicatorView, refreshControl: UIRefreshControl, subView: UIView, tableView: UITableView, mealType: FetchData.MealType) {
         defaults.set(false, forKey: "ShowingTomorrow")
         defaults.set(0, forKey: "DaysForward")
         UniversalMethods.loadDataVC(fetchData: &fetchData, prevButton: prevButton, nextButton: nextButton, defaults: defaults, dateLabel: dateLabel, navigationItem: navigationItem, mealTitleLabel: mealTitleLabel, mealLabel: mealLabel, loadWheel: loadWheel, refreshControl: refreshControl, subView: subView, tableView: tableView, mealType: mealType)
-        if (fetchData.defaults.integer(forKey: "Day") == NSCalendar.current.component(Calendar.Component.day, from: Date()) || !UniversalMethods.connectedToNetwork()){
+        if (fetchData.defaults.integer(forKey: "DayLastUpdate") == NSCalendar.current.component(Calendar.Component.day, from: Date()) || !UniversalMethods.connectedToNetwork()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5){
                 refreshControl.endRefreshing();
             }
@@ -123,15 +131,21 @@ class UniversalMethods{
     }
     
     static func prevMealToLabel(dateLabel: UILabel, prevButton: UIBarButtonItem, nextButton: UIBarButtonItem, defaults: UserDefaults, fetchData: FetchData, mealLabel: UILabel, mealTitleLabel: UILabel, navigationItem: UINavigationItem, subView: UIView, tableView: UITableView, refreshControl: UIRefreshControl, loadWheel: UIActivityIndicatorView, mealType: FetchData.MealType) {
+        loadWheel.stopAnimating()
         let tempDate = dateFromDefaults(defaults: defaults)
         var daysForward = defaults.integer(forKey: "DaysForward")
         if (daysForward>=1){
             daysForward -= 1
-            dateLabel.text = "*" + incDateString(by: daysForward, to: tempDate)
+            if defaults.string(forKey: "Date\(daysForward)") != nil {
+                dateLabel.text = "*" + defaults.string(forKey: "Date\(daysForward)")!
+            }
+            else {
+                dateLabel.text = "?   "
+            }
             if (daysForward==0){
                 prevButton.isEnabled=false
                 nextButton.isEnabled=true
-                dateLabel.text = dateLabel.text?.replacingOccurrences(of: "*", with: "")
+                dateLabel.text = defaults.string(forKey: "Date")
             }
             else{
                 prevButton.isEnabled=true
@@ -139,14 +153,17 @@ class UniversalMethods{
             }
         }
         if (daysForward>=1 && daysForward<=7){
-            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil){
+            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil) {
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: defaults.string(forKey: "\(mealType.rawValue)\(daysForward)")!)
             }
-            else{
+            else {
+                dateLabel.text = "*" + incDateString(by: daysForward, to: dateFromDefaults(defaults: defaults))
                 fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, loadWheel: loadWheel, refreshControl: refreshControl, navigationItem:navigationItem, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, jsExec: "document.execCommand($('#somDateNavNext').click())", jsExecCount: daysForward, mealType: mealType)
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: "")
                 navigationItem.prompt = "Loading..."
-                loadWheel.startAnimating()
+                if defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != fetchData.noMealString {
+                    loadWheel.startAnimating()
+                }
             }
         }
         else if (daysForward<1){
@@ -159,11 +176,17 @@ class UniversalMethods{
     }
     
     static func nextMealToLabel(dateLabel: UILabel, prevButton: UIBarButtonItem, nextButton: UIBarButtonItem, defaults: UserDefaults, fetchData: FetchData, mealLabel: UILabel, mealTitleLabel: UILabel, navigationItem: UINavigationItem, refreshControl: UIRefreshControl, loadWheel: UIActivityIndicatorView, subView: UIView, tableView: UITableView, mealType: FetchData.MealType) {
+        loadWheel.stopAnimating()
         let tempDate = dateFromDefaults(defaults: defaults)
         var daysForward = defaults.integer(forKey: "DaysForward")
         if (daysForward<7){
             daysForward += 1
-            dateLabel.text = "*" + incDateString(by: daysForward, to: tempDate)
+            if defaults.string(forKey: "Date\(daysForward)") != nil {
+                dateLabel.text = "*" + defaults.string(forKey: "Date\(daysForward)")!
+            }
+            else {
+                dateLabel.text = "?   "
+            }
             if (daysForward==7){
                 nextButton.isEnabled=false
                 prevButton.isEnabled=true
@@ -174,14 +197,17 @@ class UniversalMethods{
             }
         }
         if (daysForward>=1 && daysForward<=7){
-            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil){
+            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil) {
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: defaults.string(forKey: "\(mealType.rawValue)\(daysForward)")!)
             }
             else{
+                dateLabel.text = "*" + incDateString(by: daysForward, to: dateFromDefaults(defaults: defaults))
                 fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, loadWheel: loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, jsExec: "document.execCommand($('#somDateNavNext').click())", jsExecCount: daysForward, mealType: mealType)
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: "")
                 navigationItem.prompt = "Loading..."
-                loadWheel.startAnimating()
+                if defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != fetchData.noMealString {
+                    loadWheel.startAnimating()
+                }
             }
         }
         defaults.set(false, forKey: "ShowingTomorrow")
@@ -189,9 +215,18 @@ class UniversalMethods{
     }
     
     static func selMealToLabel (dateLabel: UILabel, prevButton: UIBarButtonItem, nextButton: UIBarButtonItem, defaults: UserDefaults, fetchData: FetchData, mealLabel: UILabel, mealTitleLabel: UILabel, navigationItem: UINavigationItem, refreshControl: UIRefreshControl, loadWheel: UIActivityIndicatorView, subView: UIView, tableView: UITableView, mealType: FetchData.MealType) {
+        loadWheel.stopAnimating()
         let tempDate = dateFromDefaults(defaults: defaults)
         let daysForward = defaults.integer(forKey: "DaysForward")
-        dateLabel.text = "*" + incDateString(by: daysForward, to: tempDate)
+        if defaults.string(forKey: "Date\(daysForward)") != nil && daysForward != 0 {
+            dateLabel.text = "*" + defaults.string(forKey: "Date\(daysForward)")!
+        }
+        else if daysForward == 0 {
+            dateLabel.text = defaults.string(forKey: "Date")
+        }
+        else {
+            dateLabel.text = "?   "
+        }
         if (daysForward==7){
             nextButton.isEnabled=false
             prevButton.isEnabled=true
@@ -201,13 +236,17 @@ class UniversalMethods{
             prevButton.isEnabled=true
         }
         if (daysForward>=1 && daysForward<=7){
-            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil){
+            if (defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != nil) {
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: defaults.string(forKey: "\(mealType.rawValue)\(daysForward)")!)
             }
             else{
+                dateLabel.text = "*" + incDateString(by: daysForward, to: dateFromDefaults(defaults: defaults))
                 fetchData.initLoad(mealLabel: mealLabel, mealTitleLabel: mealTitleLabel, dateLabel: dateLabel, loadWheel: loadWheel, refreshControl:refreshControl, navigationItem:navigationItem, prevButton: prevButton, nextButton: nextButton, subView: subView, tableView: tableView, jsExec: "document.execCommand($('#somDateNavNext').click())", jsExecCount: daysForward, mealType: mealType)
                 UniversalMethods.setMealLabel(mealLabel: mealLabel, navigationItem: navigationItem, subView: subView, tableView: tableView, text: "")
                 navigationItem.prompt = "Loading..."
+                if defaults.string(forKey: "\(mealType.rawValue)\(daysForward)") != fetchData.noMealString {
+                    loadWheel.startAnimating()
+                }
             }
         }
         defaults.set(daysForward, forKey: "DaysForward")
@@ -221,13 +260,22 @@ class UniversalMethods{
         return NSCalendar.current.date(from: tempDateComps)!
     }
     
+    static func dateFromMD(month: Int, day: Int) -> Date {
+        var tempDateComps = DateComponents()
+        tempDateComps.setValue(day, for: .day)
+        tempDateComps.setValue(month, for: .month)
+        tempDateComps.setValue(NSCalendar.current.component(.year, from: Date()), for: .year)
+        return NSCalendar.current.date(from: tempDateComps)!
+
+    }
+    
     static func incDateString(by: Int, to: Date) -> String{
         return "\(UniversalMethods.weekDayToString(date: Calendar.current.date(byAdding: .day, value: by, to: to)!)) \(UniversalMethods.monthToShortString(date: Calendar.current.date(byAdding: .day, value: by, to: to)!)) \(UniversalMethods.dayWithEnding(date: Calendar.current.date(byAdding: .day, value: by, to: to)!))"
     }
     
-    static func addUNNotif(hour:Int, minute:Int, text:String, title:String, id:String, noMealString:String){
+    static func addUNNotif(hour:Int, minute:Int, text:String, title:String, id:String, noMealString:String, defaults:UserDefaults){
         if #available(iOS 10.0, *){
-            if (text != noMealString) {
+            if text != noMealString && defaults.integer(forKey: "Day") == NSCalendar.current.component(.day, from: Date()) {
                 // Create the trigger for the notification
                 let date = NSDateComponents()
                 date.hour = hour

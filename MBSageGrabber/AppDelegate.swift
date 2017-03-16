@@ -68,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
         defaults?.mutableSetValue(forKey: "Day")
         defaults?.mutableSetValue(forKey: "Month")
         defaults?.mutableSetValue(forKey: "Date")
+        defaults?.mutableSetValue(forKey: "DayLastUpdate")
+        defaults?.mutableSetValue(forKey: "MonthLastUpdate")
         defaults?.mutableSetValue(forKey: "navItemPromptU")
         defaults?.mutableSetValue(forKey: "Breakfast")
         for i in 1...7{
@@ -80,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
         defaults?.mutableSetValue(forKey: "Dinner")
         for i in 1...7{
             defaults?.mutableSetValue(forKey: "Dinner\(i)")
+        }
+        for i in 1...7{
+            defaults?.mutableSetValue(forKey: "Date\(i)")
         }
         defaults?.mutableSetValue(forKey: "Nondefaults?ettings")
         defaults?.mutableSetValue(forKey: "LunchNotifOn")
@@ -95,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
         defaults?.mutableSetValue(forKey: "ShowingTomorrow")
         defaults?.mutableSetValue(forKey: "WebRefreshedToday")
         defaults?.mutableSetValue(forKey: "IsLoading")
+        defaults?.mutableSetValue(forKey: "NavButtonsDisabled")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -187,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate/*,
     
     func backgroundRefresh() {
         fetchData = FetchData()
-        if (self.fetchData.defaults.integer(forKey: "Day") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
+        if (self.fetchData.defaults.integer(forKey: "DayLastUpdate") != NSCalendar.current.component(Calendar.Component.day, from: Date())){
             if connectedToNetwork(){
                 self.fetchData.initLoad()
                 NSLog("fetching data")
